@@ -262,20 +262,24 @@ def write_output(output_path: str, data: Dict[str, object]) -> None:
         json.dump(data, handle, indent=2)
 
 
-def print_summary(data: Dict[str, object]) -> None:
-    print("")
-    print("Detected Australian plates")
-    print("==========================")
+def build_summary_lines(data: Dict[str, object]) -> List[str]:
+    lines = ["", "Detected Australian plates", "=========================="]
     if not data["plates"]:
-        print("No plates detected.")
-        return
+        lines.append("No plates detected.")
+        return lines
     for plate in data["plates"]:
-        print(
+        lines.append(
             f"{plate['plate']:8} | count={plate['count']:<3} | "
             f"first={plate['first_seen']:.2f}s | "
             f"last={plate['last_seen']:.2f}s | "
             f"avg_conf={plate['avg_confidence']:.2f}"
         )
+    return lines
+
+
+def print_summary(data: Dict[str, object]) -> None:
+    for line in build_summary_lines(data):
+        print(line)
 
 
 def parse_args() -> argparse.Namespace:

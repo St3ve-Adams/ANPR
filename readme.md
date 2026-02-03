@@ -17,6 +17,17 @@ pip install -r requirements.txt
 python app.py path/to/dashcam.mp4 --output plates.json
 ```
 
+## GUI
+
+Launch the desktop app:
+
+```bash
+python gui.py
+```
+
+If Tkinter is missing (common on minimal Linux installs), install it with your
+system package manager (for example `sudo apt-get install python3-tk`).
+
 ## Usage
 
 ```bash
